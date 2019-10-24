@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node bin/www",
-    "dev": "concurrently \"./node_modules/.bin/nodemon bin/www\" \"webpack-dev-server --mode development\" ",
+    "dev": "concurrently \"./node_modules/.bin/nodemon bin/www\" \" cross-env NODE_ENV=development webpack-dev-server --mode development\" ",
     "prd": "pm2 start bin/www",
     "build": "concurrently \"./node_modules/.bin/nodemon bin/www\" \"webpack --mode production\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +14,7 @@
     "babel-loader": "^7.1.5",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "3.0.0",
+    "cross-env": "6.0.3",
     "css-loader": "3.2.0",
     "debug": "^4.1.1",
     "dva": "2.4.1",

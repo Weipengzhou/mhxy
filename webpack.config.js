@@ -5,9 +5,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: path.join(__dirname, './src/index'), //入口
     output: { //出口
-        filename: '[hash].bundle.js',
+        filename: process.env.NODE_ENV + '[hash].bundle.js',
         path: path.resolve(__dirname, 'public/dist/'),
-        publicPath: '/dist/'
+        publicPath: process.env.NODE_ENV === 'development' ? '' : '/dist/',
     },
     module:{
         rules:[
@@ -50,13 +50,13 @@ module.exports = {
     },
     resolve: {
         //下面后缀的文件导入时可以省略文件名，js必须要有，否则会react.js文件会无法被解析
-        extensions: [".ts", ".tsx", ".js"]
+        extensions: [".ts", ".tsx", ".js", ".jsx"]
      },
      devtool: 'source-map', //调试工具，不同模式构建速度不同，source-map适合生存环境，开发环境用eval-source-map
      //安装依赖
      //npm install --save-dev webpack-dev-server
      devServer: {
-        contentBase: path.resolve(__dirname, "./public/dist"),
+        contentBase: path.resolve(__dirname, "public/dist"),
         compress:true,
         port:8080,
         host:'127.0.0.1'
