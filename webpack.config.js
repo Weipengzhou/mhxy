@@ -12,38 +12,18 @@ module.exports = {
     },
     module:{
         rules:[
-            //ts-loader 用来解析ts文件
-            //需要安装以下依赖
-            //npm install ts-loader --save-dev
-            //npm install typescript --save-dev
-            //安装react相关依赖
-            //npm install --save-dev react react-dom @types/react @types/react-dom
-                {
-                    test: /\.tsx?$/,
-                    loader: 'awesome-typescript-loader',
-                    options: {
-                        transpileOnly: true,
-                        getCustomTransformers: () => ({
-                            before: [ tsImportPluginFactory({ libraryName: 'antd-mobile', style: 'css' }) ]
-                        }),
-                        compilerOptions: {
-                            module: 'es2015'
-                        }
-                    },
-                    exclude: /node_modules/
-                },
                 {
                     test: /\.(js|jsx)$/,
                     loader: 'babel-loader',
-                    query: {
-                        presets: ['react', 'es2015']//支持react jsx和ES6语法编译
-                    }
+                    // query: {
+                    //     presets: ['react', 'es2015']//支持react jsx和ES6语法编译
+                    // }
                   },
                 //加载json，png等文件
                 //安装npm install --save-dev file-loader
                 {
-                   test: /\.[(png)|(obj)|(json)]$/,
-                   loader: "file-loader" 
+                   test: /\.(png|jpe?g|obj|json)$/,
+                   loader: "url-loader"
                 },
                 //加载css
                 //安装npm install --save-dev css-loader
@@ -77,21 +57,21 @@ module.exports = {
                     ],
                     exclude: /node_modules/
                 },
-            {
-                test: /\.css$/,
-                use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader' },
-                    { loader: 'postcss-loader',
-                        options: {
-                            sourceMap: true,
-                            config: {
-                                path: 'postcss.config.js'
-                            }
-                        }
-                    }
-                ]
-            },{// 编译less
+                {
+                    test: /\.css$/,
+                    use: [
+                        { loader: 'style-loader' },
+                        { loader: 'css-loader' },
+                        // { loader: 'postcss-loader',
+                        //     options: {
+                        //         sourceMap: true,
+                        //         config: {
+                        //             path: 'postcss.config.js'
+                        //         }
+                        //     }
+                        // }
+                    ],
+                },{// 编译less
                 test: /\.less$/,
                 use: [
                     {
@@ -103,22 +83,22 @@ module.exports = {
                             importLoaders: 1,
                         }
                     },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            sourceMap: true,
-                            config: {
-                                path: 'postcss.config.js'
-                            }
-                        }
-                    },
+                    // {
+                    //     loader: 'postcss-loader',
+                    //     options: {
+                    //         sourceMap: true,
+                    //         config: {
+                    //             path: 'postcss.config.js'
+                    //         }
+                    //     }
+                    // },
                     {
                         loader: 'less-loader',
                         options: {
                             sourceMap: true,
                         }
                     }
-                ]
+                ],
             }
             ]    
     },
@@ -133,7 +113,7 @@ module.exports = {
         contentBase: path.resolve(__dirname, "public/dist"),
         compress:true,
         port:8080,
-        host:'127.0.0.1'
+        host:'0.0.0.0'
       },
       plugins: [
        //该插件将为你生成一个HTML5文件，其中包括使用script标签的body中的所有webpack包
