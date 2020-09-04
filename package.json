@@ -37,7 +37,7 @@
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
     "less-loader": "5.0.0",
-    "node-sass": "4.13.0",
+    "node-sass": "4.14.1",
     "postcss-loader": "3.0.0",
     "postcss-modules": "1.4.1",
     "postcss-plugins-px2rem": "0.0.5",
